@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BWSharedResource>
+    <name>Costumers DB</name>
+    <resourceType>ae.shared.JDBCSharedResource</resourceType>
+    <config>
+        <driver>org.postgresql.Driver</driver>
+        <maxConnections>10</maxConnections>
+        <loginTimeout>3</loginTimeout>
+        <connectionType>JDBC</connectionType>
+        <UseSharedJndiConfig>false</UseSharedJndiConfig>
+        <user>postgres</user>
+        <password>#!WJ5o+zgJloFc3Rd6Jinn2A7aEKlJDjQPDX41lL5XJDg=</password>
+        <location>jdbc:postgresql://localhost:5432/postgres</location>
+    </config>
+</BWSharedResource>

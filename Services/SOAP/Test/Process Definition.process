@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1691681825351" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/schemas/Academy_Bernardo/Services/SOAP/Schemas/Schema1.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://www.tibco.com/schemas/Academy_Bernardo/Services/SOAP/Schemas/Schema.xsd">
+    <wsdl:import namespace="http://xmlns.example.com/1691681825351" location="/Services/SOAP/WSDLFile/wsdlfile.wsdl"/>
+    <pd:name>Services/SOAP/Test/Process Definition.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startX>150</pd:startX>
+    <pd:startY>64</pd:startY>
+    <pd:returnBindings>
+        <xsl:for-each select="$SOAPRequestReply/outputMessage/ns1:CostumerDetails">
+            <root>
+                <NIF>
+                    <xsl:value-of select="ns1:NIF"/>
+                </NIF>
+                <Nome>
+                    <xsl:value-of select="ns1:Nome"/>
+                </Nome>
+                <Morada>
+                    <xsl:value-of select="ns1:Morada"/>
+                </Morada>
+                <ServicoContratado>
+                    <xsl:value-of select="ns1:ServicoContratado"/>
+                </ServicoContratado>
+                <NumeroBoxs>
+                    <xsl:value-of select="ns1:NumeroBoxs"/>
+                </NumeroBoxs>
+            </root>
+        </xsl:for-each>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType>
+        <xsd:element name="root">
+            <xsd:complexType>
+                <xsd:sequence>
+                    <xsd:element name="NIF" type="xsd:int"/>
+                    <xsd:element name="Nome" type="xsd:string"/>
+                    <xsd:element name="Morada" type="xsd:string"/>
+                    <xsd:element name="ServicoContratado" type="xsd:string"/>
+                    <xsd:element name="NumeroBoxs" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:element>
+    </pd:endType>
+    <pd:endX>450</pd:endX>
+    <pd:endY>64</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1691683509839</pd:targetNamespace>
+    <pd:activity name="SOAPRequestReply">
+        <pd:type>com.tibco.plugin.soap.SOAPSendReceiveActivity</pd:type>
+        <pd:resourceType>ae.activities.SOAPSendReceiveUI</pd:resourceType>
+        <pd:x>302</pd:x>
+        <pd:y>67</pd:y>
+        <config>
+            <timeout>0</timeout>
+            <soapAttachmentStyle>SwA</soapAttachmentStyle>
+            <timeoutType>Seconds</timeoutType>
+            <service>pfx:WSDL-service1</service>
+            <servicePort>PortTypeEndpoint1</servicePort>
+            <operation>Operation</operation>
+            <soapAction>/Services/SOAP/WSDL/WSDL-service1.serviceagent/PortTypeEndpoint1/Operation</soapAction>
+            <endpointURL>http://localhost:-1/Services/SOAP/WSDL/WSDL-service1.serviceagent/PortTypeEndpoint1</endpointURL>
+            <authScheme>NONE</authScheme>
+        </config>
+        <pd:inputBindings>
+            <inputMessage>
+                <ns:Request>
+                    <ns:NIF>
+                        <xsl:value-of select="1"/>
+                    </ns:NIF>
+                </ns:Request>
+            </inputMessage>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>SOAPRequestReply</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>SOAPRequestReply</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

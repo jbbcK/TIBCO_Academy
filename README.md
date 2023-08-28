@@ -1,0 +1,1 @@
+# Exercises to learn some of the fundamentals of TIBCO

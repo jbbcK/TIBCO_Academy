@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Created by TIBCO WSDL-->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://xmlns.example.com/1692024158755" xmlns:ns0="http://www.tibco.com/schemas/Redo/Services/SOAP/Schemas/Schema1.xsd" xmlns:ns1="http://www.tibco.com/schemas/Redo/Services/SOAP/Schemas/Schema.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="Untitled" targetNamespace="http://xmlns.example.com/1692024158755">
+    <wsdl:types>
+        <xs:schema xmlns="http://www.tibco.com/schemas/Redo/Services/SOAP/Schemas/Schema1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/Redo/Services/SOAP/Schemas/Schema1.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="Morada" type="xs:string"/>
+            <xs:element name="NIF" type="xs:int"/>
+            <xs:element name="Request">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns0:NIF"/>
+                        <xs:element ref="ns0:Morada" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://www.tibco.com/schemas/Redo/Services/SOAP/Schemas/Schema.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/Redo/Services/SOAP/Schemas/Schema.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="CustomerDetails">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns1:NIF"/>
+                        <xs:element ref="ns1:Nome" minOccurs="0"/>
+                        <xs:element ref="ns1:Morada" minOccurs="0"/>
+                        <xs:element ref="ns1:ServicoContratado"/>
+                        <xs:element ref="ns1:NumeroBoxs"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Morada" type="xs:string"/>
+            <xs:element name="NIF" type="xs:int"/>
+            <xs:element name="Nome" type="xs:string"/>
+            <xs:element name="NumeroBoxs" type="xs:int"/>
+            <xs:element name="ServicoContratado" type="xs:string"/>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:service name="WSDL-service2">
+        <wsdl:port name="PortTypeEndpoint2" binding="tns:PortTypeEndpoint2Binding">
+            <soap:address location="http://localhost:8080/Services/SOAP/WSDL/WSDL-service2.serviceagent/PortTypeEndpoint2"/>
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:portType name="PortType">
+        <wsdl:operation name="Operation">
+            <wsdl:input message="tns:Input"/>
+            <wsdl:output message="tns:Output"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="PortTypeEndpoint2Binding" type="tns:PortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Operation">
+            <soap:operation style="document" soapAction="/Services/SOAP/WSDL/WSDL-service2.serviceagent/PortTypeEndpoint2/Operation"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="Request"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="CustomerDetails"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:message name="Input">
+        <wsdl:part name="Request" element="ns0:Request"/>
+    </wsdl:message>
+    <wsdl:message name="Output">
+        <wsdl:part name="CustomerDetails" element="ns1:CustomerDetails"/>
+    </wsdl:message>
+</wsdl:definitions>

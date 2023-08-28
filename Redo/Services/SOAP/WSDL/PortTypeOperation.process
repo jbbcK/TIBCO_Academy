@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pfx="http://www.tibco.com/schemas/Redo/Services/SOAP/Schemas/Schema.xsd" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/schemas/Redo/Services/SOAP/Schemas/Schema1.xsd" xmlns:wsdlPfx="http://xmlns.example.com/1692023031293">
+    <xs:import xmlns:xs="http://www.w3.org/2001/XMLSchema" namespace="http://www.tibco.com/schemas/Redo/Services/SOAP/Schemas/Schema.xsd" schemaLocation="/Services/SOAP/Schemas/CustomerDetails.xsd"/>
+    <wsdl:import namespace="http://xmlns.example.com/1692023031293" location="/Services/SOAP/WSDL/WSDL.wsdl"/>
+    <pd:name>Services/SOAP/WSDL/PortTypeOperation.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType wsMsgRef="wsdlPfx:Input"/>
+    <pd:startX>143</pd:startX>
+    <pd:startY>62</pd:startY>
+    <pd:returnBindings>
+        <wsdlPfx:Output>
+            <CustomerDetails>
+                <xsl:for-each select="$Map-Data/pfx:CustomerDetails">
+                    <pfx:CustomerDetails>
+                        <pfx:NIF>
+                            <xsl:value-of select="pfx:NIF"/>
+                        </pfx:NIF>
+                        <xsl:if test="pfx:Nome">
+                            <pfx:Nome>
+                                <xsl:value-of select="pfx:Nome"/>
+                            </pfx:Nome>
+                        </xsl:if>
+                        <xsl:if test="pfx:Morada">
+                            <pfx:Morada>
+                                <xsl:value-of select="pfx:Morada"/>
+                            </pfx:Morada>
+                        </xsl:if>
+                        <pfx:ServicoContratado>
+                            <xsl:value-of select="pfx:ServicoContratado"/>
+                        </pfx:ServicoContratado>
+                        <pfx:NumeroBoxs>
+                            <xsl:value-of select="pfx:NumeroBoxs"/>
+                        </pfx:NumeroBoxs>
+                    </pfx:CustomerDetails>
+                </xsl:for-each>
+            </CustomerDetails>
+        </wsdlPfx:Output>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType wsMsgRef="wsdlPfx:Output"/>
+    <pd:endX>450</pd:endX>
+    <pd:endY>65</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1692024158809</pd:targetNamespace>
+    <pd:activity name="Map Data">
+        <pd:type>com.tibco.plugin.mapper.MapperActivity</pd:type>
+        <pd:resourceType>ae.activities.MapperActivity</pd:resourceType>
+        <pd:x>282</pd:x>
+        <pd:y>70</pd:y>
+        <config>
+            <element ref="pfx:CustomerDetails"/>
+        </config>
+        <pd:inputBindings>
+            <xsl:choose>
+                <xsl:when test="$Start/wsdlPfx:Input/Request/ns:Request/ns:NIF=1">
+                    <pfx:CustomerDetails>
+                        <pfx:NIF>
+                            <xsl:value-of select="'1'"/>
+                        </pfx:NIF>
+                        <pfx:Nome>
+                            <xsl:value-of select="'NOME1'"/>
+                        </pfx:Nome>
+                        <pfx:Morada>
+                            <xsl:value-of select="'MORADA1'"/>
+                        </pfx:Morada>
+                        <pfx:ServicoContratado>
+                            <xsl:value-of select="'TV1'"/>
+                        </pfx:ServicoContratado>
+                        <pfx:NumeroBoxs>
+                            <xsl:value-of select="'1'"/>
+                        </pfx:NumeroBoxs>
+                    </pfx:CustomerDetails>
+                </xsl:when>
+                <xsl:otherwise>
+                    <pfx:CustomerDetails>
+                        <pfx:NIF>
+                            <xsl:value-of select="'0'"/>
+                        </pfx:NIF>
+                        <pfx:Nome>
+                            <xsl:value-of select="'...'"/>
+                        </pfx:Nome>
+                        <pfx:Morada>
+                            <xsl:value-of select="'...'"/>
+                        </pfx:Morada>
+                        <pfx:ServicoContratado>
+                            <xsl:value-of select="'...'"/>
+                        </pfx:ServicoContratado>
+                        <pfx:NumeroBoxs>
+                            <xsl:value-of select="'0'"/>
+                        </pfx:NumeroBoxs>
+                    </pfx:CustomerDetails>
+                </xsl:otherwise>
+            </xsl:choose>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Map Data</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Map Data</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

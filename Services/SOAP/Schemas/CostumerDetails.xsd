@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/Academy_Bernardo/Services/SOAP/Schemas/Schema.xsd"
+	 targetNamespace="http://www.tibco.com/schemas/Academy_Bernardo/Services/SOAP/Schemas/Schema.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="CostumerDetails">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="NIF"/>
+				<xs:element ref="Nome" minOccurs="0"/>
+				<xs:element ref="Morada" minOccurs="0"/>
+				<xs:element ref="ServicoContratado"/>
+				<xs:element ref="NumeroBoxs"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="NIF" type="xs:int"/>
+	<xs:element name="Nome" type="xs:string"/>
+	<xs:element name="Morada" type="xs:string"/>
+	<xs:element name="ServicoContratado" type="xs:string"/>
+	<xs:element name="NumeroBoxs" type="xs:int"/>
+</xs:schema>
